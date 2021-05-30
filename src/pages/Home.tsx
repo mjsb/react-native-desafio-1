@@ -5,37 +5,69 @@ import { MyTasksList } from '../components/MyTasksList';
 import { TodoInput } from '../components/TodoInput';
 
 interface Task {
-  id: number;
-  title: string;
-  done: boolean;
+	id: number;
+	title: string;
+	done: boolean;
 }
 
 export function Home() {
-  // const [tasks, setTasks] = useState<Task[]>([]);
+	
+	const [tasks, setTasks] = useState<Task[]>([]);
 
-  function handleAddTask(newTaskTitle: string) {
-    //TODO - add new task if it's not empty
-  }
+	function handleAddTask(newTaskTitle: string) {
 
-  function handleMarkTaskAsDone(id: number) {
-    //TODO - mark task as done if exists
-  }
+		if ( newTaskTitle !== '' ) {
 
-  function handleRemoveTask(id: number) {
-    //TODO - remove task from state
-  }
+			const data = {
+				id: new Date().getTime(),
+				title: newTaskTitle,
+				done: false
+			}
 
-  return (
-    <>
-      <Header />
+			setTasks( oldState => [...oldState, data]);
 
-      <TodoInput addTask={handleAddTask} />
+		}
 
-      <MyTasksList 
-        tasks={tasks} 
-        onPress={handleMarkTaskAsDone} 
-        onLongPress={handleRemoveTask} 
-      />
-    </>
-  )
+	}
+
+	function handleMarkTaskAsDone(id: number) {		
+
+		const taskDone = tasks.map(function(objeto) {
+
+			if(objeto.id === id) {
+				
+				objeto.done === false ? objeto.done = true : objeto.done = false;
+
+			}
+
+			return objeto
+
+		});
+
+		setTasks(oldState => taskDone);
+
+	}
+
+	function handleRemoveTask(id: number) {
+		
+		setTasks(oldState => oldState.filter (
+			task => task.id !== id
+		));
+
+	}
+
+	return (
+		<>	
+			<Header />
+
+			<TodoInput addTask={handleAddTask} />
+
+			<MyTasksList 
+				tasks={tasks} 
+				onPress={handleMarkTaskAsDone} 
+				onLongPress={handleRemoveTask} 
+			/>
+		</>
+	)
+
 }
