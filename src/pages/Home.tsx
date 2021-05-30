@@ -44,7 +44,7 @@ export function Home() {
 
 		});
 
-		setTasks(oldState => taskDone);
+		setTasks(taskDone);
 
 	}
 
