@@ -22,7 +22,7 @@ export function TodoInput({ addTask }: TodoInputProps) {
 		<View style={[styles.inputContainer, Platform.OS === 'ios' ? styles.inputIOSShadow : styles.inputAndroidShadow]}>
 		<TextInput 
 			style={styles.input} 
-			placeholder="Adicionar novo To Do..."
+			placeholder="Adicionar novo todo..."
 			returnKeyType="send"
 			value={task}
 			onChangeText={setTask}

@@ -16,7 +16,7 @@ export function Home() {
 
 	function handleAddTask(newTaskTitle: string) {
 
-		if ( newTaskTitle !== '' ) {
+		if ( newTaskTitle ) {
 
 			const data = {
 				id: new Date().getTime(),
